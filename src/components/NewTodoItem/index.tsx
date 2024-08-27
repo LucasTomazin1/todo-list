@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 export const NewTodoItem: React.FC = () => {
   const [todo, setTodo] = useState('')
-  const [todoList, setTodoList] = useState<string[]>([])
-
+  const inputRef = useRef<HTMLInputElement>(null)
+  const [todoList, setTodoList] = useState<{ text: string; isDone: boolean }[]>(
+    [],
+  )
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodo(e.target.value)
   }
@@ -11,22 +13,68 @@ export const NewTodoItem: React.FC = () => {
     onAddHandler(todo)
   }
 
+  const onEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      onAddHandler(todo)
+    }
+  }
+
   const onAddHandler = (todo: string) => {
     if (todo === '') return
-    setTodoList([...todoList, todo])
+    setTodoList([...todoList, { text: todo, isDone: false }])
     console.log(todoList)
+    setTodo('')
+    inputRef.current?.focus()
+  }
+
+  const handleCheckboxChange = (index: number) => {
+    const updatedTodoList = todoList.map((item, i) =>
+      i === index ? { ...item, isDone: !item.isDone } : item,
+    )
+    setTodoList(updatedTodoList)
   }
 
   return (
-    <div>
-      <h2>Nova Tarefa</h2>
-      <input type="text" onChange={onChangeHandler} />
-      <button
-        className="border-2 border-black rounded-md px-2 cursor-pointer"
-        onClick={onClickHandler}
-      >
-        Adicionar
-      </button>
-    </div>
+    <>
+      <div className="p-2">
+        <input
+          placeholder="Nova Tarefa"
+          type="text"
+          onChange={onChangeHandler}
+          value={todo}
+          ref={inputRef}
+          onKeyPress={onEnterPress}
+        />
+        <button
+          className="border-2 border-black rounded-md px-2 cursor-pointer"
+          onClick={onClickHandler}
+        >
+          Adicionar
+        </button>
+      </div>
+
+      <div className="flex flex-col p-2">
+        <h2>Lista de Tarefas</h2>
+        <div>
+          {todoList.map((todo, index) => (
+            <div
+              key={index}
+              className={`flex flex-row gap-1 items-center ${
+                todo.isDone ? 'line-through opacity-70' : ''
+              }`}
+            >
+              <input
+                type="checkbox"
+                checked={todo.isDone}
+                onChange={() => handleCheckboxChange(index)}
+              />
+              <p className="">
+                {index + 1}- {todo.text}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
   )
 }
