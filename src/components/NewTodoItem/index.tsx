@@ -22,7 +22,6 @@ export const NewTodoItem: React.FC = () => {
   const onAddHandler = (todo: string) => {
     if (todo === '') return
     setTodoList([...todoList, { text: todo, isDone: false }])
-    console.log(todoList)
     setTodo('')
     inputRef.current?.focus()
   }
@@ -33,6 +32,8 @@ export const NewTodoItem: React.FC = () => {
     )
     setTodoList(updatedTodoList)
   }
+
+  const doenedCount = todoList.filter((todo) => todo.isDone).length
 
   return (
     <>
@@ -55,9 +56,9 @@ export const NewTodoItem: React.FC = () => {
 
       <div className="flex flex-col p-2">
         <h2>Lista de Tarefas</h2>
-        <div>
+        <ul>
           {todoList.map((todo, index) => (
-            <div
+            <li
               key={index}
               className={`flex flex-row gap-1 items-center ${
                 todo.isDone ? 'line-through opacity-70' : ''
@@ -71,9 +72,14 @@ export const NewTodoItem: React.FC = () => {
               <p className="">
                 {index + 1}- {todo.text}
               </p>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
+        {todoList.length > 0 && (
+          <p className="text-sm">
+            Tarefas concluídas: {doenedCount} / {todoList.length}
+          </p>
+        )}
       </div>
     </>
   )
