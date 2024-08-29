@@ -6,11 +6,13 @@ interface TodoListProps {
   setTodoList: React.Dispatch<
     React.SetStateAction<{ text: string; isDone: boolean }[]>
   >
+  removeTodo: (index: number) => void
 }
 
 export const TodoList: React.FC<TodoListProps> = ({
   todoList,
   setTodoList,
+  removeTodo,
 }) => {
   const handleCheckboxChange = (index: number) => {
     const updatedTodoList = todoList.map((item, i) =>
@@ -32,6 +34,7 @@ export const TodoList: React.FC<TodoListProps> = ({
             isDone={todo.isDone}
             onToggle={() => handleCheckboxChange(index)}
             index={index}
+            removeTodo={removeTodo}
           />
         ))}
       </ul>

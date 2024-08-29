@@ -3,6 +3,7 @@ export interface TodoItemProps {
   isDone: boolean
   onToggle: () => void
   index: number
+  removeTodo: (index: number) => void
 }
 
 export const TodoItem: React.FC<TodoItemProps> = ({
@@ -10,6 +11,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
   isDone,
   onToggle,
   index,
+  removeTodo,
 }) => {
   return (
     <li
@@ -22,7 +24,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
       <p className="">
         {index + 1}- {text}
       </p>
-      <button>x</button>
+      <button onClick={() => removeTodo(index)}>x</button>
     </li>
   )
 }

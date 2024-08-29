@@ -1,15 +1,11 @@
 import React, { useRef, useState } from 'react'
-import { TodoList } from '../..'
 
 interface NewTodoItemProps {
   addTodo: (text: string) => void
 }
-export const NewTodoItem: React.FC<NewTodoItemProps> = () => {
+export const NewTodoItem: React.FC<NewTodoItemProps> = ({ addTodo }) => {
   const [todo, setTodo] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
-  const [todoList, setTodoList] = useState<{ text: string; isDone: boolean }[]>(
-    [],
-  )
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodo(e.target.value)
@@ -17,7 +13,7 @@ export const NewTodoItem: React.FC<NewTodoItemProps> = () => {
 
   const onAddHandler = (todo: string) => {
     if (todo === '') return
-    setTodoList([...todoList, { text: todo, isDone: false }])
+    addTodo(todo)
     setTodo('')
     inputRef.current?.focus()
   }
