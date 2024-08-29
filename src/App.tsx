@@ -1,9 +1,9 @@
-import { NewTodoItem } from './components/NewTodoItem'
+import { TodoManager } from './components/TodoManager'
 
 function App() {
   return (
     <>
-      <NewTodoItem />
+      <TodoManager />
     </>
   )
 }
