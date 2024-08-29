@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { NewTodoItem } from '../TodoList/components/NewTodoItem'
-import { TodoList } from '../TodoList'
-import { TodoItemInterface } from '../../types'
+import { TodoList } from '..'
+import { NewTodoItem } from '../components/NewTodoItem'
+import { TodoItemInterface } from '../../../types'
+
 export const TodoManager = () => {
   const [todoList, setTodoList] = useState<TodoItemInterface[]>([])
 

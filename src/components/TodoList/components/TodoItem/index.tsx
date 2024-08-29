@@ -1,5 +1,3 @@
-import { FaTrash } from 'react-icons/fa'
-
 export interface TodoItemProps {
   text: string
   isDone: boolean
@@ -18,17 +16,21 @@ export const TodoItem: React.FC<TodoItemProps> = ({
   return (
     <li
       key={index}
-      className={`flex flex-row gap-1 items-center ${
+      className={`flex justify-between gap-1 items-center border-b border-zinc-400 ${
         isDone ? 'line-through opacity-70' : ''
       }`}
     >
-      <input type="checkbox" checked={isDone} onChange={onToggle} />
-      <p className="">
-        {index + 1}- {text}
-      </p>
-      <button onClick={() => removeTodo(index)}>
-        <FaTrash />
-      </button>
+      <div className="flex gap-1">
+        <input type="checkbox" checked={isDone} onChange={onToggle} />
+        <p className="">
+          {index + 1}- {text}
+        </p>
+      </div>
+      <div>
+        <button onClick={() => removeTodo(index)} className="text-red-500">
+          X
+        </button>
+      </div>
     </li>
   )
 }

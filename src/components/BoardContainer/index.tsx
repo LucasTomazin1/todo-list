@@ -1,9 +1,9 @@
 import { Button } from '../atoms/Button'
 import { MdOutlineEditNote } from 'react-icons/md'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Board } from '../Board'
 import { LuListTodo } from 'react-icons/lu'
-import { FaPlus } from 'react-icons/fa'
+import { FaPlus, FaTrash } from 'react-icons/fa'
 import { BoardInterface } from '../../types'
 
 export const BoardContainer: React.FC = () => {
@@ -28,9 +28,6 @@ export const BoardContainer: React.FC = () => {
     setIsNote(false)
     setIsTodo(false)
   }
-  useEffect(() => {
-    console.log(boards)
-  }, [boards])
 
   return (
     <div className="w-full min-h-full p-4 bg-black">
@@ -40,17 +37,25 @@ export const BoardContainer: React.FC = () => {
             tag={<LuListTodo />}
             onClick={() => {
               onClickHandler()
-              setIsTodo(true)
-              setIsNote(false)
+              setIsTodo(!isTodo)
+              setIsNote(isNote)
             }}
           />
           <Button
             tag={<MdOutlineEditNote />}
             onClick={() => {
               onClickHandler()
-              setIsNote(true)
-              setIsTodo(false)
+              setIsNote(!isNote)
+              setIsTodo(isTodo)
             }}
+          />
+          <Button
+            tag={
+              <button className="">
+                <FaTrash />
+              </button>
+            }
+            onClick={onClickHandler}
           />
         </div>
         {showInput && (
@@ -64,7 +69,7 @@ export const BoardContainer: React.FC = () => {
           </div>
         )}
       </header>
-      <section>
+      <section className="flex flex-col gap-3 py-3">
         {boards.map((board) => (
           <Board
             key={board.id}

@@ -33,7 +33,7 @@ export const NewTodoItem: React.FC<NewTodoItemProps> = ({ addTodo }) => {
     <>
       <div className="flex m-2 rounded-2xl overflow-hidden border border-zinc-400 bg-gray-800">
         <input
-          className="bg-gray-800 p-1 pl-2"
+          className="bg-gray-800 p-1 pl-2 focus:outline-none"
           placeholder="Nova Tarefa"
           type="text"
           onChange={onChangeHandler}
