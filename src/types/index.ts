@@ -9,7 +9,7 @@ export interface TodoListInterface {
 
 export interface BoardInterface {
   id: number
-  tittle: string
+  title: string
   isTodo?: boolean
   isNote?: boolean
 }

@@ -9,7 +9,7 @@ import { BoardInterface } from '../../types'
 export const BoardContainer: React.FC = () => {
   const [boards, setBoards] = useState<BoardInterface[]>([])
   const [showInput, setShowInput] = useState(false)
-  const [tittle, setTittle] = useState('Sem Título')
+  const [title, setTittle] = useState('Sem Título')
   const [isTodo, setIsTodo] = useState(false)
   const [isNote, setIsNote] = useState(false)
   const onChangeTittle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,7 +21,7 @@ export const BoardContainer: React.FC = () => {
   const addBoard = () => {
     setBoards((prevBoards) => [
       ...prevBoards,
-      { tittle, id: prevBoards.length, isNote, isTodo },
+      { title, id: prevBoards.length, isNote, isTodo },
     ])
     setShowInput(!showInput)
     setTittle('Sem Título')
@@ -73,7 +73,7 @@ export const BoardContainer: React.FC = () => {
         {boards.map((board) => (
           <Board
             key={board.id}
-            tittle={board.tittle}
+            title={board.title}
             id={board.id}
             isNote={board.isNote}
             isTodo={board.isTodo}

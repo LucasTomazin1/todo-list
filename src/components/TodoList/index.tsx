@@ -26,7 +26,6 @@ export const TodoList: React.FC<TodoListProps> = ({
 
   return (
     <div className="flex flex-col p-2">
-      <h2>Lista de Tarefas</h2>
       <ul>
         {todoList.map((todo, index) => (
           <TodoItem

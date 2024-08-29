@@ -15,14 +15,13 @@ export const TodoItem: React.FC<TodoItemProps> = ({
 }) => {
   return (
     <li
-      key={index}
       className={`flex justify-between gap-1 items-center border-b border-zinc-400 ${
         isDone ? 'line-through opacity-70' : ''
       }`}
     >
       <div className="flex gap-1">
         <input type="checkbox" checked={isDone} onChange={onToggle} />
-        <p className="">
+        <p className="break-all hyphens">
           {index + 1}- {text}
         </p>
       </div>

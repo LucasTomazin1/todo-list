@@ -12,7 +12,7 @@ export const NewTodoItem: React.FC<NewTodoItemProps> = ({ addTodo }) => {
     setTodo(e.target.value)
   }
 
-  const onAddHandler = (todo: string) => {
+  const onSubmitHandler = (todo: string) => {
     if (todo === '') return
     addTodo(todo)
     setTodo('')
@@ -20,12 +20,12 @@ export const NewTodoItem: React.FC<NewTodoItemProps> = ({ addTodo }) => {
   }
 
   const onClickHandler = () => {
-    onAddHandler(todo)
+    onSubmitHandler(todo)
   }
 
-  const onEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const onEnterPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      onAddHandler(todo)
+      onSubmitHandler(todo)
     }
   }
 
@@ -39,7 +39,7 @@ export const NewTodoItem: React.FC<NewTodoItemProps> = ({ addTodo }) => {
           onChange={onChangeHandler}
           value={todo}
           ref={inputRef}
-          onKeyPress={onEnterPress}
+          onKeyPress={onEnterPressHandler}
         />
         <button
           className="py-1 px-5 cursor-pointer border-l border-zinc-400"
