@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import { FaPlus } from 'react-icons/fa'
 
 interface NewTodoItemProps {
   addTodo: (text: string) => void
@@ -43,7 +44,7 @@ export const NewTodoItem: React.FC<NewTodoItemProps> = ({ addTodo }) => {
           className="border-2 border-black rounded-md px-2 cursor-pointer"
           onClick={onClickHandler}
         >
-          Adicionar
+          <FaPlus />
         </button>
       </div>
     </>

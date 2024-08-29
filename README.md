@@ -1,11 +1,18 @@
 # Todo List
 
-Um simples aplicativo de lista de tarefas propenso a crescer.
+Um aplicativo de lista de tarefas expansível e adaptável.
 
 ## Funcionalidades
 
+- Criar quadros de notas/tarefas
+- Excluir quadros
 - Adicionar novas tarefas
-- Exibir tarefas adicionadas
+- Editar notas/tarefas
+- Completar notas/tarefas
+- Excluir notas/tarefas
+- Lixeira temporária
+- Restaurar quadros inteiros ou notas/tarefas
+- Contador de tarefas totais e concluidas
 
 ## Tecnologias Utilizadas
 

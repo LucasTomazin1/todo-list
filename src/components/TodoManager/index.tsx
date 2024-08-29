@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { NewTodoItem } from '../TodoList/components/NewTodoItem'
 import { TodoList } from '../TodoList'
-import { TodoItem } from '../../types'
+import { TodoItemInterface } from '../../types'
 export const TodoManager = () => {
-  const [todoList, setTodoList] = useState<TodoItem[]>([])
+  const [todoList, setTodoList] = useState<TodoItemInterface[]>([])
 
   const addTodo = (text: string) => {
     if (text === '') return
-    const newTodo: TodoItem = { text, isDone: false }
+    const newTodo: TodoItemInterface = { text, isDone: false }
     setTodoList([...todoList, newTodo])
   }
 

@@ -1,3 +1,5 @@
+import { FaTrash } from 'react-icons/fa'
+
 export interface TodoItemProps {
   text: string
   isDone: boolean
@@ -24,7 +26,9 @@ export const TodoItem: React.FC<TodoItemProps> = ({
       <p className="">
         {index + 1}- {text}
       </p>
-      <button onClick={() => removeTodo(index)}>x</button>
+      <button onClick={() => removeTodo(index)}>
+        <FaTrash />
+      </button>
     </li>
   )
 }

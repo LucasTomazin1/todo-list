@@ -1,8 +1,9 @@
 import React from 'react'
 import { TodoItem } from './components/TodoItem'
+import { TodoItemInterface } from '../../types'
 
 interface TodoListProps {
-  todoList: { text: string; isDone: boolean }[]
+  todoList: TodoItemInterface[]
   setTodoList: React.Dispatch<
     React.SetStateAction<{ text: string; isDone: boolean }[]>
   >
