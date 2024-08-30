@@ -1,11 +1,12 @@
 import { Link, useLocation } from 'react-router-dom'
 import { Button } from '../atoms/Button'
 import { MdOutlineEditNote } from 'react-icons/md'
-import { FaPlus, FaTrash } from 'react-icons/fa'
+import { FaTrash } from 'react-icons/fa'
 import { LuListTodo } from 'react-icons/lu'
 import { useState } from 'react'
 import { BoardInterface } from '../../types'
 import { FaHouse } from 'react-icons/fa6'
+import { InputText } from './../atoms/InputText/index'
 interface HeaderProps {
   addBoard: (newBoard: BoardInterface) => void
 }
@@ -68,6 +69,9 @@ export const Header: React.FC<HeaderProps> = ({ addBoard }) => {
           <Button onClick={onAddBoard} tag={<FaPlus />} />
         </div>
       )}
+      {/* {showInput && (
+        <InputText onSubmit={onAddBoard} placeholder="Título do quadro" />
+      )} */}
     </header>
   )
 }
