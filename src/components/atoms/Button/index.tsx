@@ -6,7 +6,7 @@ interface ButtonProps {
 export const Button: React.FC<ButtonProps> = ({ tag, onClick }) => {
   return (
     <button
-      className="border py-2 px-4 border-zinc-500 rounded-md cursor-pointer hover:bg-zinc-900 text-zinc-300 hover:text-white"
+      className="text-xl border py-2 px-4 border-zinc-500 rounded-md cursor-pointer hover:bg-zinc-900 text-zinc-300 hover:text-white"
       onClick={onClick}
     >
       {tag}
