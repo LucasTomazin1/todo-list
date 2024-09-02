@@ -1,5 +1,6 @@
 import { useTrash } from '../../hooks/useTrash'
 import { BoardInterface } from '../../types'
+import { Note } from '../Note'
 import { TodoManager } from '../TodoList/TodoManager'
 
 export const Board: React.FC<BoardInterface> = ({
@@ -22,7 +23,7 @@ export const Board: React.FC<BoardInterface> = ({
         </button>
       </header>
       <div className="flex ">
-        {isNote && <p>notanotaotnaotnaotna</p>}
+        {isNote && <Note />}
         {isTodo && <TodoManager />}
       </div>
     </div>

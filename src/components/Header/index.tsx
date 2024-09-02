@@ -10,20 +10,7 @@ import { BiArchiveIn, BiTrash } from 'react-icons/bi'
 interface HeaderProps {
   addBoard: (newBoard: BoardInterface) => void
 }
-const buttonMap = {
-  '/archive': {
-    to: '/',
-    icon: <BiArchiveIn />,
-  },
-  '/trash': {
-    to: '/',
-    icon: <FaHouse />,
-  },
-  '/': {
-    to: '/trash',
-    icon: <BiTrash />,
-  },
-}
+
 export const Header: React.FC<HeaderProps> = ({ addBoard }) => {
   const [showInput, setShowInput] = useState(false)
   const [title, setTitle] = useState('')
@@ -34,24 +21,6 @@ export const Header: React.FC<HeaderProps> = ({ addBoard }) => {
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value)
   }
-  //   const onClickHandler = () => {
-  //     setShowInput(!showInput)
-  //   }
-
-  //   const onClickHandler = () => {
-  //       const closeInput = () => {
-  //         setShowInput(false)
-  //         setTitle('')
-  //         setIsTodo(false)
-  //         setIsNote(false)
-  //       }
-  //     if (showInput === false) {
-  //       setShowInput(true)
-  //     }
-  //     if (showInput === true) {
-  //       closeInput()
-  //     }
-  //   }
 
   const onClickHandler = (type: 'todo' | 'note') => {
     if (showInput) {
