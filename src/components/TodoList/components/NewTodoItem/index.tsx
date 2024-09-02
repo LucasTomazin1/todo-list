@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
-import { FaPlus } from 'react-icons/fa'
+// import { FaPlus } from 'react-icons/fa'
+import { InputText } from '../../../atoms/InputText'
 
 interface NewTodoItemProps {
   addTodo: (text: string) => void
@@ -19,19 +20,19 @@ export const NewTodoItem: React.FC<NewTodoItemProps> = ({ addTodo }) => {
     inputRef.current?.focus()
   }
 
-  const onClickHandler = () => {
-    onSubmitHandler(todo)
-  }
+  //   const onClickHandler = () => {
+  //     onSubmitHandler(todo)
+  //   }
 
-  const onEnterPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      onSubmitHandler(todo)
-    }
-  }
+  //   const onEnterPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  //     if (e.key === 'Enter') {
+  //       onSubmitHandler(todo)
+  //     }
+  //   }
 
   return (
     <>
-      <div className="flex m-2 rounded-2xl overflow-hidden border border-zinc-400 bg-gray-800">
+      {/* <div className="flex m-2 rounded-2xl overflow-hidden border border-zinc-400 bg-gray-800">
         <input
           className="bg-gray-800 p-1 pl-2 focus:outline-none"
           placeholder="Nova Tarefa"
@@ -47,7 +48,14 @@ export const NewTodoItem: React.FC<NewTodoItemProps> = ({ addTodo }) => {
         >
           <FaPlus />
         </button>
-      </div>
+      </div> */}
+      <InputText
+        value={todo}
+        onChange={onChangeHandler}
+        onSubmit={onSubmitHandler}
+        ref={inputRef}
+        placeholder="Nova Tarefa"
+      />
     </>
   )
 }
