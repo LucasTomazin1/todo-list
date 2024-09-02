@@ -1,12 +1,12 @@
 import { Link, useLocation } from 'react-router-dom'
 import { Button } from '../atoms/Button'
 import { MdOutlineEditNote } from 'react-icons/md'
-import { FaTrash } from 'react-icons/fa'
 import { LuListTodo } from 'react-icons/lu'
 import { useEffect, useRef, useState } from 'react'
 import { BoardInterface } from '../../types'
 import { FaHouse } from 'react-icons/fa6'
 import { InputText } from './../atoms/InputText/index'
+import { BiArchiveIn, BiTrash } from 'react-icons/bi'
 interface HeaderProps {
   addBoard: (newBoard: BoardInterface) => void
 }
@@ -20,9 +20,39 @@ export const Header: React.FC<HeaderProps> = ({ addBoard }) => {
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value)
   }
-  const onClickHandler = () => {
-    setShowInput(!showInput)
+  //   const onClickHandler = () => {
+  //     setShowInput(!showInput)
+  //   }
+
+  //   const onClickHandler = () => {
+  //       const closeInput = () => {
+  //         setShowInput(false)
+  //         setTitle('')
+  //         setIsTodo(false)
+  //         setIsNote(false)
+  //       }
+  //     if (showInput === false) {
+  //       setShowInput(true)
+  //     }
+  //     if (showInput === true) {
+  //       closeInput()
+  //     }
+  //   }
+
+  const onClickHandler = (type: 'todo' | 'note') => {
+    if (showInput) {
+      // Close the input and reset states if it is already open
+      setShowInput(false)
+      setIsTodo(false)
+      setIsNote(false)
+    } else {
+      // Open the input and set the correct type
+      setShowInput(true)
+      setIsTodo(type === 'todo')
+      setIsNote(type === 'note')
+    }
   }
+
   const onAddBoard = () => {
     addBoard({ title, id: Date.now(), isNote, isTodo })
     setShowInput(!showInput)
@@ -38,8 +68,11 @@ export const Header: React.FC<HeaderProps> = ({ addBoard }) => {
   }, [showInput])
 
   return (
-    <header className="flex flex-col p-2 gap-2 bg-black">
+    <header className="flex flex-col p-3 gap-1 bg-zinc-800 md:flex-row items-center">
       <div className="flex gap-2">
+        <Link to="/">
+          <Button tag={<BiArchiveIn />} />
+        </Link>
         {location.pathname === '/trash' ? (
           <Link to="/">
             <Button tag={<FaHouse />} />
@@ -47,23 +80,19 @@ export const Header: React.FC<HeaderProps> = ({ addBoard }) => {
         ) : null}
         {location.pathname === '/' ? (
           <Link to="/trash">
-            <Button tag={<FaTrash />} />
+            <Button tag={<BiTrash />} />
           </Link>
         ) : null}
         <Button
           tag={<LuListTodo />}
           onClick={() => {
-            onClickHandler()
-            setIsTodo(!isTodo)
-            setIsNote(isNote)
+            onClickHandler('todo')
           }}
         />
         <Button
           tag={<MdOutlineEditNote />}
           onClick={() => {
-            onClickHandler()
-            setIsNote(!isNote)
-            setIsTodo(isTodo)
+            onClickHandler('note')
           }}
         />
       </div>
