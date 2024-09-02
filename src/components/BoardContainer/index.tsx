@@ -5,8 +5,8 @@ export const BoardContainer: React.FC<{ boards: BoardInterface[] }> = ({
   boards,
 }) => {
   return (
-    <div className="w-full min-h-full p-4 bg-black">
-      <section className="flex flex-col gap-3 py-3">
+    <section className="w-full min-h-screen pt-[80px] p-4 bg-zinc-900">
+      <div className="flex flex-col gap-3 py-3">
         {boards.map((board) => (
           <Board
             key={board.id}
@@ -16,7 +16,7 @@ export const BoardContainer: React.FC<{ boards: BoardInterface[] }> = ({
             isTodo={board.isTodo}
           />
         ))}
-      </section>
-    </div>
+      </div>
+    </section>
   )
 }
