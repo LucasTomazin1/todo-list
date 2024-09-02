@@ -4,6 +4,7 @@ import { BoardInterface } from '../types'
 interface BoardContextType {
   boards: BoardInterface[]
   addBoard: (newBoard: BoardInterface) => void
+  removeBoard: (id: number) => void
 }
 
 export const BoardContext = createContext<BoardContextType | undefined>(
@@ -19,8 +20,12 @@ export const BoardProvider: React.FC<{ children: React.ReactNode }> = ({
     setBoards((prevBoards) => [...prevBoards, newBoard])
   }
 
+  const removeBoard = (id: number) => {
+    setBoards((prevBoards) => prevBoards.filter((board) => board.id !== id))
+  }
+
   return (
-    <BoardContext.Provider value={{ boards, addBoard }}>
+    <BoardContext.Provider value={{ boards, addBoard, removeBoard }}>
       {children}
     </BoardContext.Provider>
   )
