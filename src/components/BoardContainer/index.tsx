@@ -5,7 +5,7 @@ export const BoardContainer: React.FC<{ boards: BoardInterface[] }> = ({
   boards,
 }) => {
   return (
-    <section className="w-full min-h-screen pt-[80px] p-4 bg-zinc-900">
+    <section className="w-full min-h-screen pt-[80px] md:px-10 p-4 bg-zinc-900">
       <div className="flex flex-col gap-3 py-3">
         {boards.map((board) => (
           <Board

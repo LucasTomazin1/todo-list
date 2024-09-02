@@ -1,12 +1,11 @@
 import { Routes, Route } from 'react-router-dom'
 import { Home } from '../pages/Home'
 import { Trash } from '../pages/Trash'
-import { BoardInterface } from '../types'
 import { Archive } from '../pages/Archive'
-interface AppRoutesProps {
-  boards: BoardInterface[]
-}
-export const AppRoutes: React.FC<AppRoutesProps> = ({ boards }) => {
+import { useBoards } from '../hooks/useBoards'
+
+export const AppRoutes: React.FC = () => {
+  const { boards } = useBoards()
   return (
     <Routes>
       <Route path="/" element={<Home boards={boards} />} />
