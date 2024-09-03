@@ -23,9 +23,14 @@ export const TrashProvider: React.FC<{ children: ReactNode }> = ({
   const removeTrashItem = (trashItem: BoardInterface) => {
     setTrashList(trashList.filter((item) => item.id !== trashItem.id))
   }
+
   return (
     <TrashContext.Provider
-      value={{ trashItems: trashList, addTrashItem, removeTrashItem }}
+      value={{
+        trashItems: trashList,
+        addTrashItem,
+        removeTrashItem,
+      }}
     >
       {children}
     </TrashContext.Provider>
