@@ -5,6 +5,7 @@ interface TrashContextType {
   trashItems: BoardInterface[]
   addTrashItem: (trashItem: BoardInterface) => void
   removeTrashItem: (trashItem: BoardInterface) => void
+  emptyTrash: () => void
 }
 export const TrashContext = createContext<TrashContextType | undefined>(
   undefined,
@@ -23,6 +24,9 @@ export const TrashProvider: React.FC<{ children: ReactNode }> = ({
   const removeTrashItem = (trashItem: BoardInterface) => {
     setTrashList(trashList.filter((item) => item.id !== trashItem.id))
   }
+  const emptyTrash = () => {
+    setTrashList([])
+  }
 
   return (
     <TrashContext.Provider
@@ -30,6 +34,7 @@ export const TrashProvider: React.FC<{ children: ReactNode }> = ({
         trashItems: trashList,
         addTrashItem,
         removeTrashItem,
+        emptyTrash,
       }}
     >
       {children}
