@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { ArchiveProvider } from './constexts/ArchiveContext'
 import { BoardProvider } from './constexts/BoardContext'
 
-// TODO: Organização por Quadros, lixeira, Controle de Acesso, Sincronização em Tempo Real, Widgets de Tempo
+// TODO: Organização por Quadros, Criação de conta, banco de dados Firestore/Realtime Database
 function App() {
   return (
     <>

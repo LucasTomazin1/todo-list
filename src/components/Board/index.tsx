@@ -8,6 +8,8 @@ import { useLocation } from 'react-router-dom'
 import { LiaTrashRestoreAltSolid } from 'react-icons/lia'
 import { RiInboxUnarchiveLine } from 'react-icons/ri'
 import { useArchive } from '../../hooks/useArchive'
+import { ConfirmDeleteModal } from './ConfirmDeleteModal'
+import { useState } from 'react'
 
 export const Board: React.FC<BoardInterface> = ({
   title,
@@ -19,20 +21,30 @@ export const Board: React.FC<BoardInterface> = ({
   const { addBoard, removeBoard } = useBoards()
   const { addTrashItem, removeTrashItem } = useTrash()
   const { addArchiveItem, removeArchiveItem } = useArchive()
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [itemToDelete, setItemToDelete] = useState<BoardInterface | null>(null)
 
   const handleDelete = () => {
     addTrashItem({ title, isTodo, isNote, id })
     removeBoard(id)
   }
-
+  const handleConfirmDelete = () => {
+    if (itemToDelete) {
+      removeTrashItem(itemToDelete)
+      setIsModalOpen(false)
+      setItemToDelete(null)
+    }
+  }
   const handleTrashItemDelete = () => {
-    removeTrashItem({ title, isTodo, isNote, id })
+    setItemToDelete({ title, isTodo, isNote, id })
+    setIsModalOpen(true)
   }
 
   const handleRestoreTrashItem = () => {
     removeTrashItem({ title, isTodo, isNote, id })
     addBoard({ title, isTodo, isNote, id })
   }
+
   const handleArchiveItem = () => {
     addArchiveItem({ title, isTodo, isNote, id })
     removeBoard(id)
@@ -44,7 +56,7 @@ export const Board: React.FC<BoardInterface> = ({
   }
 
   return (
-    <div className="flex flex-col max-w-[300px] border border-zinc-400 rounded-md p-2 text-zinc-300">
+    <div className="flex flex-col w-[300px] border border-zinc-400 rounded-md p-2 text-zinc-300">
       <header className="flex justify-between items-start">
         <h1 className="text-xl text-bold">{title}</h1>
         {location.pathname === '/' ? (
@@ -72,7 +84,10 @@ export const Board: React.FC<BoardInterface> = ({
         ) : null}
         {location.pathname === '/archive' ? (
           <div className="flex gap-2">
-            <button onClick={handleRestoreArchiveItem}>
+            <button
+              onClick={handleRestoreArchiveItem}
+              className="text-green-500"
+            >
               <RiInboxUnarchiveLine />
             </button>
             <button onClick={handleDelete} className="text-red-500">
@@ -85,6 +100,12 @@ export const Board: React.FC<BoardInterface> = ({
         {isNote && <Note />}
         {isTodo && <TodoManager />}
       </div>
+      {isModalOpen && (
+        <ConfirmDeleteModal
+          onConfirm={handleConfirmDelete}
+          onRequestClose={() => setIsModalOpen(false)}
+        />
+      )}
     </div>
   )
 }
