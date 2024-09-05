@@ -102,7 +102,7 @@ export const Header: React.FC = () => {
           <InputText
             ref={inputRef}
             onSubmit={onAddBoard}
-            placeholder="Título do quadro"
+            placeholder={isTodo ? 'Titúlo da Lista' : 'Titúlo da Nota'}
             value={title}
             onChange={onChangeTitle}
           />

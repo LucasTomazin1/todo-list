@@ -48,6 +48,7 @@ export const Board: React.FC<BoardInterface> = ({
   const handleArchiveItem = () => {
     addArchiveItem({ title, isTodo, isNote, id })
     removeBoard(id)
+    removeTrashItem({ title, isTodo, isNote, id })
   }
 
   const handleRestoreArchiveItem = () => {
@@ -71,7 +72,7 @@ export const Board: React.FC<BoardInterface> = ({
         ) : null}
         {location.pathname === '/trash' ? (
           <div className="flex gap-2">
-            <button>
+            <button onClick={handleArchiveItem}>
               <BiArchiveIn />
             </button>
             <button onClick={handleRestoreTrashItem} className="text-green-500">

@@ -4,9 +4,9 @@ import { useArchive } from '../hooks/useArchive'
 export const Archive: React.FC = () => {
   const { archiveItems } = useArchive()
   return (
-    <section className="w-full min-h-screen bg-zinc-900  pt-[80px]">
+    <section className="w-full min-h-screen bg-zinc-900  pt-[80px] md:px-10 p-4">
       {archiveItems.length === 0 ? (
-        <p className="text-white">O arquivo está vazio</p>
+        <p className="text-zinc-300">O arquivo está vazio</p>
       ) : (
         <BoardContainer boards={archiveItems} />
       )}

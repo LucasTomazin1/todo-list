@@ -38,7 +38,7 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>(
           onKeyPress={handleKeyPress}
         />
         <button
-          className="py-1 px-5 cursor-pointer border-l border-zinc-400"
+          className="py-1 px-5 cursor-pointer border-l text-zinc-300 border-zinc-400"
           onClick={handleClick}
         >
           <FaPlus />
