@@ -4,4 +4,5 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
+  base: '/todo_react_vite_deploy',
 })
