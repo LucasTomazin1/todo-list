@@ -11,6 +11,7 @@ export const AppRoutes: React.FC = () => {
       <Route path="/" element={<Home boards={boards} />} />
       <Route path="/trash" element={<Trash />} />
       <Route path="/archive" element={<Archive />} />
+      <Route path="/todo-list" element={<Home boards={boards} />} />
     </Routes>
   )
 }

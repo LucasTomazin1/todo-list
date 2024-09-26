@@ -5,6 +5,7 @@ interface BoardContextType {
   boards: BoardInterface[]
   addBoard: (newBoard: BoardInterface) => void
   removeBoard: (id: number) => void
+  updateBoard: (board: BoardInterface) => void
 }
 
 export const BoardContext = createContext<BoardContextType | undefined>(
@@ -24,8 +25,18 @@ export const BoardProvider: React.FC<{ children: React.ReactNode }> = ({
     setBoards((prevBoards) => prevBoards.filter((board) => board.id !== id))
   }
 
+  const updateBoard = (updatedBoard: BoardInterface) => {
+    setBoards((prevBoards) =>
+      prevBoards.map((board) =>
+        board.id === updatedBoard.id ? updatedBoard : board,
+      ),
+    )
+  }
+
   return (
-    <BoardContext.Provider value={{ boards, addBoard, removeBoard }}>
+    <BoardContext.Provider
+      value={{ boards, addBoard, removeBoard, updateBoard }}
+    >
       {children}
     </BoardContext.Provider>
   )

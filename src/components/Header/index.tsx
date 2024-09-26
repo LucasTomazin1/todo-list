@@ -49,13 +49,13 @@ export const Header: React.FC = () => {
   return (
     <header className="flex flex-col header fixed top-0 w-full md:px-10 left-0 py-3 gap-1 bg-black md:flex-row items-center">
       <div className="flex gap-2">
-        {location.pathname === '/' ? (
+        {location.pathname === '/todo-list' ? (
           <Link to="/archive">
             <Button tag={<BiArchiveIn />} onClick={() => setShowInput(false)} />
           </Link>
         ) : null}
         {location.pathname === '/archive' ? (
-          <Link to="/">
+          <Link to="/todo-list">
             <Button tag={<FaHouse />} onClick={() => setShowInput(false)} />
           </Link>
         ) : null}
@@ -66,11 +66,11 @@ export const Header: React.FC = () => {
         ) : null}
 
         {location.pathname === '/trash' ? (
-          <Link to="/">
+          <Link to="/todo-list">
             <Button tag={<FaHouse />} onClick={() => setShowInput(false)} />
           </Link>
         ) : null}
-        {location.pathname === '/' ? (
+        {location.pathname === '/todo-list' ? (
           <Link to="/trash">
             <Button tag={<BiTrash />} onClick={() => setShowInput(false)} />
           </Link>
@@ -80,7 +80,7 @@ export const Header: React.FC = () => {
             <Button tag={<BiTrash />} onClick={() => setShowInput(false)} />
           </Link>
         ) : null}
-        <Link to="/">
+        <Link to="/todo-list">
           <Button
             tag={<LuListTodo />}
             onClick={() => {
@@ -88,7 +88,7 @@ export const Header: React.FC = () => {
             }}
           />
         </Link>
-        <Link to="/">
+        <Link to="/todo-list">
           <Button
             tag={<MdOutlineEditNote />}
             onClick={() => {

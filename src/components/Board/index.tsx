@@ -9,7 +9,8 @@ import { LiaTrashRestoreAltSolid } from 'react-icons/lia'
 import { RiInboxUnarchiveLine } from 'react-icons/ri'
 import { useArchive } from '../../hooks/useArchive'
 import { ConfirmDeleteModal } from './ConfirmDeleteModal'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { MdModeEditOutline } from 'react-icons/md'
 
 export const Board: React.FC<BoardInterface> = ({
   title,
@@ -18,11 +19,19 @@ export const Board: React.FC<BoardInterface> = ({
   id,
 }) => {
   const location = useLocation()
-  const { addBoard, removeBoard } = useBoards()
+  const { addBoard, removeBoard, updateBoard } = useBoards()
   const { addTrashItem, removeTrashItem } = useTrash()
   const { addArchiveItem, removeArchiveItem } = useArchive()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [itemToDelete, setItemToDelete] = useState<BoardInterface | null>(null)
+  const [isEditing, setIsEditing] = useState(false)
+  const [editedTitle, setEditedTitle] = useState(title)
+  const inputRef = useRef<HTMLInputElement>(null)
+  useEffect(() => {
+    if (isEditing && inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [isEditing])
 
   const handleDelete = () => {
     addTrashItem({ title, isTodo, isNote, id })
@@ -56,11 +65,51 @@ export const Board: React.FC<BoardInterface> = ({
     addBoard({ title, isTodo, isNote, id })
   }
 
+  const handleEditClick = () => {
+    setIsEditing(true)
+  }
+
+  const handleEditTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEditedTitle(e.target.value)
+  }
+
+  const handleEditSubmit = () => {
+    if (editedTitle.trim()) {
+      const updatedBoard = { title: editedTitle, isTodo, isNote, id }
+      updateBoard(updatedBoard)
+      setIsEditing(false)
+    }
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleEditSubmit()
+    }
+  }
+
   return (
     <div className="flex flex-col w-[300px] border border-zinc-400 rounded-md p-2 text-zinc-300">
       <header className="flex justify-between items-start">
-        <h1 className="text-xl text-bold">{title}</h1>
-        {location.pathname === '/' ? (
+        <div className="flex">
+          {isEditing ? (
+            <input
+              ref={inputRef}
+              value={editedTitle}
+              onChange={handleEditTitleChange}
+              onBlur={handleEditSubmit}
+              onKeyDown={handleKeyDown}
+              className="border border-gray-500 rounded p-1"
+            />
+          ) : (
+            <h1 className="text-xl text-bold max-w-[220px] overflow-hidden">
+              {title}
+            </h1>
+          )}
+          <button onClick={handleEditClick}>
+            <MdModeEditOutline />
+          </button>
+        </div>
+        {location.pathname === '/todo-list' ? (
           <div className="flex gap-2">
             <button onClick={handleArchiveItem}>
               <BiArchiveIn />
