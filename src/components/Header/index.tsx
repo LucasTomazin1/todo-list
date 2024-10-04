@@ -16,6 +16,9 @@ export const Header: React.FC = () => {
   const location = useLocation()
   const inputRef = useRef<HTMLInputElement>(null)
   const { addBoard } = useBoards()
+  const isLoginOrRegisterPage =
+    location.pathname === '/login' || location.pathname === '/register'
+
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value)
   }
@@ -45,10 +48,10 @@ export const Header: React.FC = () => {
       inputRef.current.focus()
     }
   }, [showInput])
-
+  if (isLoginOrRegisterPage) return null
   return (
-    <header className="flex flex-col header fixed top-0 w-full md:px-10 left-0 py-3 gap-1 bg-black md:flex-row items-center">
-      <div className="flex gap-2">
+    <header className="flex flex-col fixed top-0 w-full sm:px-10 left-0 py-3 gap-1 bg-black sm:flex-row items-center">
+      <section className="flex gap-1 items-center">
         {location.pathname === '/todo-list' ? (
           <Link to="/archive">
             <Button tag={<BiArchiveIn />} onClick={() => setShowInput(false)} />
@@ -96,7 +99,11 @@ export const Header: React.FC = () => {
             }}
           />
         </Link>
-      </div>
+        <div className="right-2 xs:fixed flex flex-col p-2 rounded-lg gap-1 text-white text-sm underline text-center xs:pr-10">
+          <Link to="/register">register</Link>
+          <Link to="/login">login</Link>
+        </div>
+      </section>
       <div className="w-[270px]">
         {showInput && (
           <InputText
@@ -108,6 +115,14 @@ export const Header: React.FC = () => {
           />
         )}
       </div>
+      {/* <div className="flex items-center">
+        <Link
+          to="/login"
+          className="py-2 px-4 rounded-lg text-white text-sm underline"
+        >
+          login
+        </Link>
+      </div> */}
     </header>
   )
 }

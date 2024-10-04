@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { ArchiveProvider } from './constexts/ArchiveContext'
 import { BoardProvider } from './constexts/BoardContext'
 
-// TODO: reordenar os quadros, Criação de conta, banco de dados Firestore/Realtime Database
+// TODO: reordenar os quadros
 function App() {
   return (
     <>
