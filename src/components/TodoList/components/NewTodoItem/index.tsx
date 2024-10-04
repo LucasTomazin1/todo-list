@@ -54,6 +54,7 @@ export const NewTodoItem: React.FC<NewTodoItemProps> = ({ addTodo }) => {
         onChange={onChangeHandler}
         onSubmit={onSubmitHandler}
         ref={inputRef}
+        showButton={true}
         placeholder="Nova Tarefa"
       />
     </>

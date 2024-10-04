@@ -111,6 +111,7 @@ export const Header: React.FC = () => {
             onSubmit={onAddBoard}
             placeholder={isTodo ? 'Titúlo da Lista' : 'Titúlo da Nota'}
             value={title}
+            showButton={true}
             onChange={onChangeTitle}
           />
         )}
