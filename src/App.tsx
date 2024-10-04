@@ -5,20 +5,23 @@ import { AppRoutes } from './routes'
 import { BrowserRouter } from 'react-router-dom'
 import { ArchiveProvider } from './constexts/ArchiveContext'
 import { BoardProvider } from './constexts/BoardContext'
+import { AuthProvider } from './constexts/AuthContext'
 
 // TODO: reordenar os quadros
 function App() {
   return (
     <>
       <BrowserRouter>
-        <BoardProvider>
-          <ArchiveProvider>
-            <TrashProvider>
-              <Header />
-              <AppRoutes />
-            </TrashProvider>
-          </ArchiveProvider>
-        </BoardProvider>
+        <AuthProvider>
+          <BoardProvider>
+            <ArchiveProvider>
+              <TrashProvider>
+                <Header />
+                <AppRoutes />
+              </TrashProvider>
+            </ArchiveProvider>
+          </BoardProvider>
+        </AuthProvider>
       </BrowserRouter>
     </>
   )
