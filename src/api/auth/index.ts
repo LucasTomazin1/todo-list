@@ -1,4 +1,5 @@
 import { saveUserToLocalStorage } from '../localStorage'
+import { getUsersFromLocalStorage } from '../localStorage'
 
 export const registerUser = (
   username: string,
@@ -11,5 +12,19 @@ export const registerUser = (
 }
 
 export const loginUser = (username: string, password: string) => {
-  console.log(username, password)
+  const users = getUsersFromLocalStorage()
+
+  if (!users) {
+    return
+  }
+
+  const foundUser = users.find(
+    (user: { username: string; password: string }) =>
+      user.username === username && user.password === password,
+  )
+  if (foundUser) {
+    return true
+  } else {
+    return false
+  }
 }

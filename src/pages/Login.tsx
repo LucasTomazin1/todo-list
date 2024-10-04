@@ -1,12 +1,12 @@
 import { InputText } from '../components/atoms/InputText'
 import { useAuth } from '../hooks/useAuth'
-import { getUserFromLocalStorage } from '../api/localStorage'
+import { getUsersFromLocalStorage } from '../api/localStorage'
 
 export const LoginPage: React.FC = () => {
   const { handleLogin, setUsername, username, setPassword, password } =
     useAuth()
 
-  const user = getUserFromLocalStorage()
+  const user = getUsersFromLocalStorage()
   console.log('Usuário registrado:', user)
 
   return (

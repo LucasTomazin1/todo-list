@@ -45,8 +45,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   }
 
   const handleLogin = () => {
+    const isLoggedIn = loginUser(username, password)
+    if (!isLoggedIn) return
+    else localStorage.setItem('isLoggedIn', 'true')
     router('/todo-list')
-    loginUser(username, password)
   }
 
   return (

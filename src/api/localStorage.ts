@@ -1,4 +1,4 @@
-const USER_KEY = 'registeredUser'
+const USERS_KEY = 'registeredUsers'
 
 export const saveUserToLocalStorage = (user: {
   username: string
@@ -6,14 +6,16 @@ export const saveUserToLocalStorage = (user: {
   email: string
   id: string
 }) => {
-  localStorage.setItem(USER_KEY, JSON.stringify(user))
+  const users = JSON.parse(localStorage.getItem(USERS_KEY) || '[]')
+  users.push(user)
+  localStorage.setItem(USERS_KEY, JSON.stringify(users))
 }
 
-export const getUserFromLocalStorage = () => {
-  const user = localStorage.getItem(USER_KEY)
+export const getUsersFromLocalStorage = () => {
+  const user = localStorage.getItem(USERS_KEY)
   return user ? JSON.parse(user) : null
 }
 
 export const removeUserFromLocalStorage = () => {
-  localStorage.removeItem(USER_KEY)
+  localStorage.removeItem(USERS_KEY)
 }
