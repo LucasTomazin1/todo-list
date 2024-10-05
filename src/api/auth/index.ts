@@ -28,3 +28,12 @@ export const loginUser = (username: string, password: string) => {
     return false
   }
 }
+export const logoutUser = (username: string) => {
+  const users = getUsersFromLocalStorage()
+  const user = users.find(
+    (user: { username: string }) => user.username === username,
+  )
+  if (!user) return
+
+  if (user) return false
+}

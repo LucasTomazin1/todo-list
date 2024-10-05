@@ -1,5 +1,5 @@
 import React, { createContext, useState, ReactNode } from 'react'
-import { registerUser, loginUser } from '../api/auth'
+import { registerUser, loginUser, logoutUser } from '../api/auth'
 import { useNavigate } from 'react-router-dom'
 
 interface AuthContextProps {
@@ -15,6 +15,9 @@ interface AuthContextProps {
   passwordDiff: boolean
   setPasswordDiff: (passwordDiff: boolean) => void
   handleLogin: () => void
+  handleLogout: () => void
+  isLoggedIn: boolean
+  setIsLoggedIn: (isLoggedIn: boolean) => void
 }
 
 export const AuthContext = createContext<AuthContextProps | undefined>(
@@ -29,6 +32,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const [password, setPassword] = useState<string>('')
   const [confirmPassword, setConfirmPassword] = useState<string>('')
   const [passwordDiff, setPasswordDiff] = useState<boolean>(false)
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
   const router = useNavigate()
   const generateUserId = () => {
     return `user-${Date.now()}`
@@ -45,9 +49,18 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   }
 
   const handleLogin = () => {
-    const isLoggedIn = loginUser(username, password)
-    if (!isLoggedIn) return
-    else localStorage.setItem('isLoggedIn', 'true')
+    const loginSuccessful = loginUser(username, password)
+    if (loginSuccessful) {
+      localStorage.setItem('isLoggedIn', 'true')
+      setIsLoggedIn(true)
+      router('/todo-list')
+    }
+  }
+
+  const handleLogout = () => {
+    logoutUser(username)
+    localStorage.setItem('isLoggedIn', 'false')
+    setIsLoggedIn(false)
     router('/todo-list')
   }
 
@@ -66,6 +79,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
         passwordDiff,
         setPasswordDiff,
         handleLogin,
+        isLoggedIn,
+        setIsLoggedIn,
+        handleLogout,
       }}
     >
       {children}
