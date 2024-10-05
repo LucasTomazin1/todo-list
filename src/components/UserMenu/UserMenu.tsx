@@ -4,11 +4,11 @@ import { useAuth } from '../../hooks/useAuth'
 export const UserMenu: React.FC = () => {
   const { handleLogout, isLoggedIn } = useAuth()
   const [showSettings, setShowSettings] = useState(false)
-
   const handleLogoutClick = () => {
     handleLogout()
     setShowSettings(false)
   }
+
   return (
     <>
       {isLoggedIn && (
