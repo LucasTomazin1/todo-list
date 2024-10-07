@@ -33,9 +33,13 @@ export const Note: React.FC = () => {
           className="w-full h-64 px-1 bg-gray-800 rounded-md text-sm focus:outline-none focus:border-none resize-none"
         />
       ) : (
-        <p className="break-all hyphens w-full min-h-10" onClick={handleClick}>
-          {text}
-        </p>
+        <div className="w-full min-h-10 cursor-text" onClick={handleClick}>
+          {text.split('\n').map((paragraph, index) => (
+            <p key={index} className="break-all hyphens">
+              {paragraph}
+            </p>
+          ))}
+        </div>
       )}
     </div>
   )
