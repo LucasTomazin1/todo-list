@@ -57,7 +57,8 @@ export const Header: React.FC = () => {
     <>
       <header className="flex flex-col fixed top-0 w-full sm:px-10 left-0 py-3 gap-1 bg-black sm:flex-row items-center">
         <section className="flex gap-1 items-center">
-          {location.pathname === '/todo-list' ? (
+          {location.pathname === '/todo-list' ||
+          location.pathname === '/todo-list/' ? (
             <Link to="/archive">
               <Button
                 tag={<BiArchiveIn />}
@@ -84,7 +85,8 @@ export const Header: React.FC = () => {
               <Button tag={<FaHouse />} onClick={() => setShowInput(false)} />
             </Link>
           ) : null}
-          {location.pathname === '/todo-list' ? (
+          {location.pathname === '/todo-list' ||
+          location.pathname === '/todo-list/' ? (
             <Link to="/trash">
               <Button tag={<BiTrash />} onClick={() => setShowInput(false)} />
             </Link>
